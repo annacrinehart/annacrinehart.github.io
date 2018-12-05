@@ -41,41 +41,51 @@
 				<!-- Two -->
 					<section id="two">
 						<h2>Recent Work</h2>
-						<div class="row">
-							<article class="col-6 col-12-xsmall work-item">
+
+						<ul class="actions">
+							<li>
+								<a href="#" class="button toggle-button button-active" id="all-toggle" onclick="return toggle('all')">All</a>
+							</li>
+							<li>
+								<a href="#" class="button toggle-button" id="photo-toggle" onclick="return toggle('photo')">Photography</a>
+							</li>
+
+							<li>
+								<a href="#" class="button toggle-button" id="design-toggle" onclick="return toggle('design')">Design</a>
+							<li>						</ul>
+
+						<div class="row" id="photography-gallery">
+							<article class="col-6 col-12-xsmall work-item photo-item">
 								<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
 								<h3>Magna sed consequat tempus</h3>
 								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
 							</article>
-							<article class="col-6 col-12-xsmall work-item">
+							<article class="col-6 col-12-xsmall work-item design-item">
 								<a href="images/fulls/02.jpg" class="image fit thumb"><img src="images/thumbs/02.jpg" alt="" /></a>
 								<h3>Ultricies lacinia interdum</h3>
 								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
 							</article>
-							<article class="col-6 col-12-xsmall work-item">
+							<article class="col-6 col-12-xsmall work-item photo-item">
 								<a href="images/fulls/03.jpg" class="image fit thumb"><img src="images/thumbs/03.jpg" alt="" /></a>
 								<h3>Tortor metus commodo</h3>
 								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
 							</article>
-							<article class="col-6 col-12-xsmall work-item">
+							<article class="col-6 col-12-xsmall work-item photo-item">
 								<a href="images/fulls/04.jpg" class="image fit thumb"><img src="images/thumbs/04.jpg" alt="" /></a>
 								<h3>Quam neque phasellus</h3>
 								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
 							</article>
-							<article class="col-6 col-12-xsmall work-item">
+							<article class="col-6 col-12-xsmall work-item design-item">
 								<a href="images/fulls/05.jpg" class="image fit thumb"><img src="images/thumbs/05.jpg" alt="" /></a>
 								<h3>Nunc enim commodo aliquet</h3>
 								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
 							</article>
-							<article class="col-6 col-12-xsmall work-item">
+							<article class="col-6 col-12-xsmall work-item design-item">
 								<a href="images/fulls/06.jpg" class="image fit thumb"><img src="images/thumbs/06.jpg" alt="" /></a>
 								<h3>Risus ornare lacinia</h3>
 								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
 							</article>
 						</div>
-						<ul class="actions">
-							<li><a href="#" class="button">Full Portfolio</a></li>
-						</ul>
 					</section>
 
 				<!-- Three -->
@@ -84,16 +94,16 @@
 						<p>Accumsan pellentesque commodo blandit enim arcu non at amet id arcu magna. Accumsan orci faucibus id eu lorem semper nunc nisi lorem vulputate lorem neque lorem ipsum dolor.</p>
 						<div class="row">
 							<div class="col-8 col-12-small">
-								<form method="post" action="#">
+								<form method="post" action="https://formspree.io/acr54321@gmail.com">
 									<div class="row gtr-uniform gtr-50">
 										<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
 										<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
 										<div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
 									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" /></li>
+									</ul>
 								</form>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
 							</div>
 							<div class="col-4 col-12-small">
 								<ul class="labeled-icons">
@@ -452,6 +462,34 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			</footer>
 
 		<!-- Scripts -->
+			<script>
+				var currentCategory = 'all';
+				function toggle(category) {
+					currentCategory = category;
+
+					var activeButton = document.getElementsByClassName('button-active')[0];
+					if (activeButton.id === currentCategory + '-toggle') {
+						return;
+					}
+					activeButton.classList.toggle("button-active");
+					var toggleButtons = document.getElementsByClassName('toggle-button');
+					for (var i = 0; i < toggleButtons.length; ++i) {
+						if (toggleButtons[i].id === currentCategory + '-toggle') {
+							toggleButtons[i].classList.toggle("button-active");
+							break;
+						}
+					}
+					var workItems = document.getElementsByClassName('work-item');
+					for (var i = 0; i < workItems.length; ++i) {
+						if (currentCategory === 'all' || workItems[i].classList.contains(currentCategory + '-item')) {
+							workItems[i].classList.remove('hide-me');
+						} else {
+							workItems[i].classList.add('hide-me');
+						}
+					}
+					return false;
+				}
+			</script>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.poptrox.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
